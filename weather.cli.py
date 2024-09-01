@@ -45,22 +45,29 @@ def calculate_average_temperatures(weather_data):
     #print(first_data)
 
     #intialize key variable for total temp and count
-    total_count = "total_temp"
+    total_temp = "total_temp"
     count = "count"
+    average_temp = "average_temp"
 
     #geting unique cities list and total temp and count
     for key_data in weather_data:
         if key_data[city] not in cities_list:
             cities_list.append(key_data[city])
-            city_temeratures[key_data[city]] = {total_count: key_data[temperature], count: 1}
+            city_temeratures[key_data[city]] = {total_temp: key_data[temperature], count: 1}
         else:
-            city_temeratures[key_data[city]][total_count] += key_data[temperature]
+            city_temeratures[key_data[city]][total_temp] += key_data[temperature]
             city_temeratures[key_data[city]][count] += 1
 
-    print(city_temeratures)
+    #print(city_temeratures)
     #print(cities_list)
+    
+    #Calculate avarage temp for each city
+    for city in cities_list:
+        average_temperature = city_temeratures[city][total_temp] / city_temeratures[city][count]
+        city_temeratures[city][average_temp] = average_temperature
 
-    #Cal
+    print(city_temeratures)
+
  
     return
 

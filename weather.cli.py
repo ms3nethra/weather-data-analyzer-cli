@@ -23,7 +23,6 @@ def weather_json_file():
         print(f"Error: {error}")
         return None
 
-weather_json_file()
 
 #Compute the average temperature for each city
 def calculate_average_temperatures(weather_data):
@@ -47,7 +46,7 @@ def calculate_average_temperatures(weather_data):
     #intialize key variable for total temp and count
     total_temp = "total_temp"
     count = "count"
-    average_temp = "average_temp"
+    
 
     #geting unique cities list and total temp and count
     for key_data in weather_data:
@@ -61,21 +60,36 @@ def calculate_average_temperatures(weather_data):
     #print(city_temeratures)
     #print(cities_list)
     
+    average_temp = "average_temp"
+    city_average_temeratures = {}
+
     #Calculate avarage temp for each city
     for city in cities_list:
         average_temperature = city_temeratures[city][total_temp] / city_temeratures[city][count]
-        city_temeratures[city][average_temp] = average_temperature
-
+        city_average_temeratures[city] = average_temperature
     #print(city_temeratures)
 
-    #print all the cities and average temperature
-    print("Average Temperatures:")
-    for city, average_tmp in city_temeratures.items():
-        print(f"{city}: {average_tmp[average_temp]} °C")
+    return city_average_temeratures
 
- 
+#calculate_average_temperatures(weather_data)
+
+def display_average_temperatures(average_temeratures):
+
+    #print all the cities of average temperature
+    print("Average Temperatures:")
+    for city, average_tmp in average_temeratures.items():
+        print(f"{city}: {average_tmp} °C")
+    return
+
+def list_all_cities(average_temeratures):
+
+    #print all the cities
+    print("Available Cities:")
+    for city, average_tmp in average_temeratures.items():
+        print(f"- {city}")
     return
 
 weather_data = weather_json_file()
-
-calculate_average_temperatures(weather_data)
+average_temeratures_data = calculate_average_temperatures(weather_data)
+#display_average_temperatures(average_temeratures_data)
+list_all_cities(average_temeratures_data)

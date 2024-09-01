@@ -66,7 +66,12 @@ def calculate_average_temperatures(weather_data):
         average_temperature = city_temeratures[city][total_temp] / city_temeratures[city][count]
         city_temeratures[city][average_temp] = average_temperature
 
-    print(city_temeratures)
+    #print(city_temeratures)
+
+    #print all the cities and average temperature
+    print("Average Temperatures:")
+    for city, average_tmp in city_temeratures.items():
+        print(f"{city}: {average_tmp[average_temp]} °C")
 
  
     return

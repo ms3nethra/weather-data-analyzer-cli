@@ -74,7 +74,6 @@ def calculate_average_temperatures(weather_data):
 #calculate_average_temperatures(weather_data)
 
 def display_average_temperatures(average_temeratures):
-
     #print all the cities of average temperature
     print("Average Temperatures:")
     for city, average_tmp in average_temeratures.items():
@@ -82,14 +81,25 @@ def display_average_temperatures(average_temeratures):
     return
 
 def list_all_cities(average_temeratures):
-
     #print all the cities
     print("Available Cities:")
     for city, average_tmp in average_temeratures.items():
         print(f"- {city}")
     return
 
+def convert_temperatures_to_Fahrenheit_and_display(average_temeratures):
+    #Convert temperatures to Fahrenheit and display
+    for city, temp_celsius in average_temeratures.items():
+        temp_fahrenheit = (temp_celsius * 9/5) + 32
+        average_temeratures[city] = temp_fahrenheit
+    
+    print("Average Temperatures:")
+    for city, temp_fahren in average_temeratures.items():
+        print(f"{city}: {temp_fahren} °F")
+    return
+
 weather_data = weather_json_file()
 average_temeratures_data = calculate_average_temperatures(weather_data)
 #display_average_temperatures(average_temeratures_data)
-list_all_cities(average_temeratures_data)
+#list_all_cities(average_temeratures_data)
+convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data)

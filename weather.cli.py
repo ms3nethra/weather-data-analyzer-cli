@@ -27,7 +27,8 @@ weather_json_file()
 
 #Compute the average temperature for each city
 def calculate_average_temperatures(weather_data):
-        
+
+    #getting main key names    
     first_data = weather_data[0]
     main_keys = []
     for key in first_data:
@@ -38,21 +39,29 @@ def calculate_average_temperatures(weather_data):
     #print(city)
     #print(temperature)
 
+    #intialize list of cities, and city temperature dict
     cities_list = []
-
+    city_temeratures = {}
     #print(first_data)
 
+    #intialize key variable for total temp and count
+    total_count = "total_temp"
+    count = "count"
+
+    #geting unique cities list and total temp and count
     for key_data in weather_data:
         if key_data[city] not in cities_list:
             cities_list.append(key_data[city])
+            city_temeratures[key_data[city]] = {total_count: key_data[temperature], count: 1}
         else:
-            continue
-    
-    print(cities_list)
-        #city = key_data["city"]
-        #temperature = key_data["temperature"]
-        #print(city)
-        #print(temperature)   
+            city_temeratures[key_data[city]][total_count] += key_data[temperature]
+            city_temeratures[key_data[city]][count] += 1
+
+    print(city_temeratures)
+    #print(cities_list)
+
+    #Cal
+ 
     return
 
 weather_data = weather_json_file()

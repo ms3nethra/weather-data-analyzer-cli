@@ -73,17 +73,24 @@ def calculate_average_temperatures(weather_data):
 
 #calculate_average_temperatures(weather_data)
 
-def display_average_temperatures(average_temeratures, city_name=None, all_cities=False):
+def display_average_temperatures(average_temeratures_data, city_name=None, all_cities=False):
+
+    #initialze data to write on json
+    average_temperatures = "Average Temperatures"
+    output_avg_data = {average_temperatures: {}}
+
     #print all the cities of average temperature
     if all_cities:
-        for city, average_tmp in average_temeratures.items():
-            output_avg_data = (f"{city}: {average_tmp} °C")
+        for city, average_tmp in average_temeratures_data.items():
+            output_avg_data[average_temperatures][city] = average_tmp
             #print(output_avg_data)
+
+    #print only the specifi city of average temperature
     else:
-        for city, average_tmp in average_temeratures.items():
+        for city, average_tmp in average_temeratures_data.items():
             if city_name in city:
                 #print(city)
-                output_avg_data = (f"{city}: {average_tmp} °C")
+                output_avg_data[average_temperatures][city] = average_tmp
                 print(output_avg_data)
                 return
 
@@ -103,7 +110,7 @@ def list_all_cities(average_temeratures):
         print(f"- {city}")
     return
 
-def convert_temperatures_to_Fahrenheit_and_display(average_temeratures):
+def convert_temperatures_to_Fahrenheit_and_display(average_temeratures, city_name=None, all_cities=False):
     #Convert temperatures to Fahrenheit and display
     for city, temp_celsius in average_temeratures.items():
         temp_fahrenheit = (temp_celsius * 9/5) + 32

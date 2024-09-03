@@ -3,6 +3,7 @@ import json
 
 file_name = "weather.json"
 
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 #check json file and read
 def weather_json_file():
     try:
@@ -23,7 +24,7 @@ def weather_json_file():
         print(f"Error: {error}")
         return None
 
-
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 #Compute the average temperature for each city
 def calculate_average_temperatures(weather_data):
 
@@ -71,8 +72,8 @@ def calculate_average_temperatures(weather_data):
 
     return city_average_temeratures
 
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 #calculate_average_temperatures(weather_data)
-
 def display_average_temperatures(average_temeratures_data, city_name=None, all_cities=False):
 
     #initialze data to write on json
@@ -101,6 +102,8 @@ def display_average_temperatures(average_temeratures_data, city_name=None, all_c
     for city, average_tmp in output_avg_data[average_temperatures].items():
         print(f"{city}: {average_tmp} °C")
 
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+#List all cities for which weather data is available
 def list_all_cities(average_temeratures):
     #print all the cities
     print("Available Cities:")
@@ -108,6 +111,8 @@ def list_all_cities(average_temeratures):
         print(f"- {city}")
     return
 
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+#Convert temperatures to Fahrenheit and display
 def convert_temperatures_to_Fahrenheit_and_display(average_temeratures, city_name=None, all_cities=False):
     #Convert temperatures to Fahrenheit and display
     for city, temp_celsius in average_temeratures.items():

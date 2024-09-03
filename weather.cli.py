@@ -86,23 +86,21 @@ def display_average_temperatures(average_temeratures_data, city_name=None, all_c
             #print(output_avg_data)
 
     #print only the specifi city of average temperature
-    else:
-        for city, average_tmp in average_temeratures_data.items():
-            if city_name in city:
-                #print(city)
-                output_avg_data[average_temperatures][city] = average_tmp
-                print(output_avg_data)
-                return
+    else: 
+        if city_name in average_temeratures_data:
+            #print(city)
+            output_avg_data[average_temperatures][city_name] = average_temeratures_data[city_name]
+            #print(output_avg_data)
 
-            else:
-                print(f"Error: {city_name} is not in the file")
-                return
-    '''
-    print("Average Temperatures:")
-    for city, average_tmp in average_temeratures.items():
+        else:
+            print(f"Error: {city_name} is not in the file")
+            return
+            
+    #print the output on terminal
+    print(average_temperatures)
+    for city, average_tmp in output_avg_data[average_temperatures].items():
         print(f"{city}: {average_tmp} °C")
-    return 
-    '''
+
 def list_all_cities(average_temeratures):
     #print all the cities
     print("Available Cities:")
@@ -124,6 +122,6 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures, city_nam
 city_name = "New York"
 weather_data = weather_json_file()
 average_temeratures_data = calculate_average_temperatures(weather_data)
-display_average_temperatures(average_temeratures_data, city_name="New York")
+display_average_temperatures(average_temeratures_data, all_cities=True)
 #list_all_cities(average_temeratures_data)
 #convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data)

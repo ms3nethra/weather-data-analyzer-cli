@@ -102,6 +102,12 @@ def display_average_temperatures(average_temeratures_data, city_name=None, all_c
     for city, average_tmp in output_avg_data.items():
         print(f"{city}: {average_tmp} °C")
 
+    #write the output data to JSON file
+    with open("average_temperatures.json", "w") as avg_jsonfile:
+        json.dump(output_avg_data, avg_jsonfile, indent=4)
+    
+    print("Average temperatures have been written to average_temperatures.json.")
+
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 #List all cities for which weather data is available
 def list_all_cities(average_temeratures):
@@ -115,22 +121,23 @@ def list_all_cities(average_temeratures):
 #Convert temperatures to Fahrenheit and display
 def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, city_name=None, all_cities=False):
     #initialze data to write on json
+    average_temeratures_data_Fahrenheit = {}
     output_avg_data = {}
 
     #Convert temperatures to Fahrenheit and
     for city, temp_celsius in average_temeratures_data.items():
         temp_fahrenheit = (temp_celsius * 9/5) + 32
-        output_avg_data[city] = temp_fahrenheit
+        average_temeratures_data_Fahrenheit[city] = temp_fahrenheit
 
     #print all cities display
     if all_cities:
-        output_avg_data = output_avg_data
+        output_avg_data = average_temeratures_data_Fahrenheit
         """output_avg_data = {'New York': 84.2, 'Los Angeles': 77.9, ...]"""
 
     #print only the specifi city of average temperature 
     else:
-        if city_name in average_temeratures_data:
-            output_avg_data[city_name] = average_temeratures_data[city_name]
+        if city_name in average_temeratures_data_Fahrenheit:
+            output_avg_data[city_name] = average_temeratures_data_Fahrenheit[city_name]
             """output_avg_data {'New York': 84.2}"""
 
         else:
@@ -141,13 +148,20 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, cit
     print("Average Temperatures")
     for city, average_tmp in output_avg_data.items():
         print(f"{city}: {average_tmp} °C")
-    return
+
+        #write the output data to JSON file
+    with open("average_temperatures.json", "w") as avg_jsonfile:
+        json.dump(output_avg_data, avg_jsonfile, indent=4)
+    
+    print("Average temperatures have been written to average_temperatures.json.")
+
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 
 city_name = "New York"
 weather_data = weather_json_file()
 #calculate_average_temperatures(weather_data)
 average_temeratures_data = calculate_average_temperatures(weather_data)
 #print(average_temeratures_data)
-display_average_temperatures(average_temeratures_data, all_cities=True)
+#display_average_temperatures(average_temeratures_data, city_name=city_name)
 #list_all_cities(average_temeratures_data)
-#convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
+convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)

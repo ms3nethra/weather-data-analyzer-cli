@@ -156,7 +156,31 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, cit
     print("Average temperatures have been written to average_temperatures.json.")
 
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+# Weather CLI Tool Usage:
+def weather_CLI_tool_usage():
+    tool_usage = """
+Weather CLI Tool Usage:
 
+python weather_cli.py [OPTIONS]
+
+This CLI tool reads weather data from a JSON file, calculates the average temperature for each city,
+writes the results to a new JSON file, and prints the average temperatures in the terminal with colored
+output.
+
+Arguments:
+--help Show this help message and exit.
+--city CITY_NAME Calculate and display the average temperature for the specified city only.
+--convert UNIT Convert temperatures to 'fahrenheit' or 'celsius' (default is Celsius).
+
+Examples:
+python weather_cli.py
+python weather_cli.py --list
+python weather_cli.py --city New York
+python weather_cli.py --convert fahrenheit
+"""
+    print(tool_usage)
+    
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 city_name = "New York"
 weather_data = weather_json_file()
 #calculate_average_temperatures(weather_data)

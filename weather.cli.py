@@ -86,12 +86,17 @@ def display_average_temperatures(average_temeratures_data, city_name=None, all_c
         """output_avg_data = {'New York': 29.0, 'Los Angeles': 25.5, ...}"""        
 
     #print only the specifi city of average temperature
-    else: 
-        if city_name in average_temeratures_data:
+    else:
+        #normalize city_name for edge cases
+        normalize_city_name = city_name.lower()
+        
+        for city in average_temeratures_data:
             #print(city)
-            output_avg_data[city_name] = average_temeratures_data[city_name]
-            #print(output_avg_data)
-            """output_avg_data = {'New York': 29.0} """
+            if city.lower() == normalize_city_name:
+                output_avg_data[city] = average_temeratures_data[city]
+                #print(output_avg_data)
+                """output_avg_data = {'New York': 29.0} """
+                break
 
         else:
             print(f"Error: {city_name} is not in the file")
@@ -136,9 +141,14 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, cit
 
     #print only the specifi city of average temperature 
     else:
-        if city_name in average_temeratures_data_Fahrenheit:
-            output_avg_data[city_name] = average_temeratures_data_Fahrenheit[city_name]
-            """output_avg_data {'New York': 84.2}"""
+        #normalize city_name for edge cases
+        normalize_city_name = city_name.lower()
+
+        for city in average_temeratures_data_Fahrenheit:        
+            if city.lower() == normalize_city_name:
+                output_avg_data[city] = average_temeratures_data_Fahrenheit[city]
+                """output_avg_data {'New York': 84.2}"""
+                break
 
         else:
             print(f"Error: {city_name} is not in the file")
@@ -181,11 +191,14 @@ python weather_cli.py --convert fahrenheit
     print(tool_usage)
     
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
-city_name = "New York"
+
+
+city_name = "new York"
 weather_data = weather_json_file()
 #calculate_average_temperatures(weather_data)
 average_temeratures_data = calculate_average_temperatures(weather_data)
 #print(average_temeratures_data)
 #display_average_temperatures(average_temeratures_data, city_name=city_name)
 #list_all_cities(average_temeratures_data)
-convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
+convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, city_name=city_name)
+#eather_CLI_tool_usage()

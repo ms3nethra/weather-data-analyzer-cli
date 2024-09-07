@@ -1,3 +1,22 @@
 {
-    "New York": 84.2
+    "New York": 84.2,
+    "Los Angeles": 77.9,
+    "Chicago": 69.8,
+    "Houston": 95.9,
+    "Phoenix": 105.8,
+    "Miami": 88.7,
+    "Seattle": 66.2,
+    "Boston": 74.3,
+    "San Francisco": 70.7,
+    "Dallas": 99.5,
+    "Philadelphia": 81.5,
+    "Atlanta": 85.1,
+    "Denver": 68.0,
+    "Las Vegas": 107.6,
+    "San Diego": 74.3,
+    "Orlando": 92.3,
+    "Portland": 63.5,
+    "San Antonio": 95.9,
+    "Austin": 94.1,
+    "Charlotte": 83.3
 }

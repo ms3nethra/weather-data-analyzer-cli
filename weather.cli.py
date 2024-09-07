@@ -1,7 +1,8 @@
-import os
-import json
+import os, json
+from colorama import init, Fore, Back, Style
 
-file_name = "weather.json"
+#Initialize colorama
+init(autoreset=True)
 
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 #check json file and read
@@ -105,7 +106,8 @@ def display_average_temperatures(average_temeratures_data, city_name=None, all_c
     #print the output on terminal
     print("Average Temperatures")
     for city, average_tmp in output_avg_data.items():
-        print(f"{city}: {average_tmp} °C")
+        color = get_temperature_color(average_tmp)
+        print(f"{color}{city}: {average_tmp} °C")
 
     #write the output data to JSON file
     with open("average_temperatures.json", "w") as avg_jsonfile:
@@ -191,14 +193,27 @@ python weather_cli.py --convert fahrenheit
     print(tool_usage)
     
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+#print temperatue output in colors using colorama
+def get_temperature_color(temperature):
+
+    if temperature < 20:
+        return Fore.BLUE
+    elif 20 <= temperature < 25:
+        return Fore.GREEN
+    elif 25 <= temperature < 30:
+        return Fore.YELLOW
+    else: 
+        return Fore.RED
 
 
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+file_name = "weather.json"
 city_name = "new York"
 weather_data = weather_json_file()
 #calculate_average_temperatures(weather_data)
 average_temeratures_data = calculate_average_temperatures(weather_data)
 #print(average_temeratures_data)
-#display_average_temperatures(average_temeratures_data, city_name=city_name)
+#display_average_temperatures(average_temeratures_data, all_cities=True)
 #list_all_cities(average_temeratures_data)
-convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, city_name=city_name)
+convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
 #eather_CLI_tool_usage()

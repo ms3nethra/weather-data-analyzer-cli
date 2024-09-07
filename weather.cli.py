@@ -159,7 +159,8 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, cit
     #print the output on terminal
     print("Average Temperatures")
     for city, average_tmp in output_avg_data.items():
-        print(f"{city}: {average_tmp} °C")
+        color = get_temperature_color(average_tmp)
+        print(f"{color}{city}: {average_tmp} °C")
 
         #write the output data to JSON file
     with open("average_temperatures.json", "w") as avg_jsonfile:
@@ -196,11 +197,11 @@ python weather_cli.py --convert fahrenheit
 #print temperatue output in colors using colorama
 def get_temperature_color(temperature):
 
-    if temperature < 20:
+    if temperature < 20 or temperature < 70:
         return Fore.BLUE
-    elif 20 <= temperature < 25:
+    elif 20 <= temperature < 25 or 70 <= temperature < 80:
         return Fore.GREEN
-    elif 25 <= temperature < 30:
+    elif 25 <= temperature < 30 or 80 <= temperature < 90:
         return Fore.YELLOW
     else: 
         return Fore.RED

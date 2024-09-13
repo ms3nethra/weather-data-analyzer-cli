@@ -159,7 +159,7 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, cit
     #print the output on terminal
     print("Average Temperatures")
     for city, average_tmp in output_avg_data.items():
-        color = get_temperature_color(average_tmp)
+        color = get_temperature_color_fahrenheit(average_tmp)
         print(f"{color}{city}: {average_tmp} °C")
 
         #write the output data to JSON file
@@ -197,24 +197,39 @@ python weather_cli.py --convert fahrenheit
 #print temperatue output in colors using colorama
 def get_temperature_color(temperature):
 
-    if temperature < 20 or temperature < 70:
+    if temperature < 20:
         return Fore.BLUE
-    elif 20 <= temperature < 25 or 70 <= temperature < 80:
+    elif 20 <= temperature < 25:
         return Fore.GREEN
-    elif 25 <= temperature < 30 or 80 <= temperature < 90:
+    elif 25 <= temperature < 30:
         return Fore.YELLOW
     else: 
         return Fore.RED
 
+"""''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+#print temperatue output in colors using colorama
+def get_temperature_color_fahrenheit(temperature):
+
+    if temperature < 70:
+        return Fore.BLUE
+    elif 70 <= temperature < 80:
+        return Fore.GREEN
+    elif 80 <= temperature < 90:
+        return Fore.YELLOW
+    else: 
+        return Fore.RED
 
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
+
+
+
 file_name = "weather.json"
 city_name = "new York"
 weather_data = weather_json_file()
 #calculate_average_temperatures(weather_data)
 average_temeratures_data = calculate_average_temperatures(weather_data)
 #print(average_temeratures_data)
-#display_average_temperatures(average_temeratures_data, all_cities=True)
+display_average_temperatures(average_temeratures_data, all_cities=True)
 #list_all_cities(average_temeratures_data)
-convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
+#convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
 #eather_CLI_tool_usage()

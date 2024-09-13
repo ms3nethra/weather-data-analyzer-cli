@@ -1,3 +1,4 @@
+import sys
 import os, json
 from colorama import init, Fore, Back, Style
 
@@ -7,6 +8,9 @@ init(autoreset=True)
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 #check json file and read
 def weather_json_file():
+    #weather data JSON file name
+    file_name = "weather.json"
+
     try:
         with open(file_name, "r") as weather_file:
             weather_data = json.load(weather_file)
@@ -188,8 +192,9 @@ Arguments:
 Examples:
 python weather_cli.py
 python weather_cli.py --list
-python weather_cli.py --city New York
+python weather_cli.py --city "New York"
 python weather_cli.py --convert fahrenheit
+python weather_cli.py --convert fahrenheit "New York"
 """
     print(tool_usage)
     
@@ -221,15 +226,57 @@ def get_temperature_color_fahrenheit(temperature):
 
 """''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"""
 
+def main_cli_func():
+    weather_data = weather_json_file()
+    if weather_data is None:
+        return
+    
+    average_temeratures_data = calculate_average_temperatures(weather_data)
 
+    if len(sys.argv) == 1:
+        #no arguments, display avf temperature, all cities
+        display_average_temperatures(average_temeratures_data, all_cities=True)
 
-file_name = "weather.json"
-city_name = "new York"
-weather_data = weather_json_file()
-#calculate_average_temperatures(weather_data)
-average_temeratures_data = calculate_average_temperatures(weather_data)
-#print(average_temeratures_data)
-display_average_temperatures(average_temeratures_data, all_cities=True)
-#list_all_cities(average_temeratures_data)
-#convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
-#eather_CLI_tool_usage()
+    elif len(sys.argv) > 1:
+        args_option = sys.argv[1].lower()
+
+        if args_option == "--list":
+            list_all_cities(average_temeratures_data)
+
+        elif args_option == "--city":
+            if len(sys.argv) > 2:
+                city_name = sys.argv[2]
+                display_average_temperatures(average_temeratures_data, city_name=city_name)
+            
+            else:
+                print("Error: City name not found")
+                weather_CLI_tool_usage()
+
+        elif args_option == "--convert":
+            if len(sys.argv) > 2:
+                unit = sys.argv[2].lower()
+                if unit == "fahrenheit":
+                    if len(sys.argv) > 3:
+                        city_name = sys.argv[3]
+                        convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, city_name=city_name)
+                    
+                    else:
+                        convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, all_cities=True)
+
+                else:
+                    print("Error: unsupported conversion unit. use 'Fahrenheit'")
+
+            else:
+                print("Error: Conversion unit is missing.")
+                weather_CLI_tool_usage()
+        
+        elif args_option == "--help":
+            weather_CLI_tool_usage()
+
+        else:
+            print("Error: unknown option.")
+            weather_CLI_tool_usage()
+        
+if __name__ == "__main__":
+    main_cli_func()   
+

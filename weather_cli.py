@@ -164,7 +164,7 @@ def convert_temperatures_to_Fahrenheit_and_display(average_temeratures_data, cit
     print("Average Temperatures")
     for city, average_tmp in output_avg_data.items():
         color = get_temperature_color_fahrenheit(average_tmp)
-        print(f"{color}{city}: {average_tmp} °C")
+        print(f"{color}{city}: {average_tmp} °F")
 
         #write the output data to JSON file
     with open("average_temperatures.json", "w") as avg_jsonfile:
